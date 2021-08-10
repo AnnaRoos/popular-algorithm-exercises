@@ -1,5 +1,5 @@
 const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 } = require('./oneToSix');
-
+const { vowels2, chunk1 } = require('./sevenToTwelve');
 
 //String reversal
 
@@ -51,6 +51,7 @@ describe("Fizz Buzz", () => {
  });
 });
 
+
 //Max character
 
 describe("Max Character", () => {
@@ -59,7 +60,9 @@ describe("Max Character", () => {
  });
 });
 
+
 //Anagrams
+
 describe("Anagrams", () => {
  test("Should implement anagrams", () => {
   expect(anagrams1("hello world", "world hello")).toBe(true);
@@ -69,3 +72,21 @@ describe("Anagrams", () => {
 });
 
 
+//Vowels
+
+describe("Vowels", () => {
+ test("Should count vowels", () => {
+  expect(vowels2("hello world")).toEqual(3);
+ });
+});
+
+
+//Array chunking
+
+describe("Array Chunking", () => {
+ test("Should implement array chunking", () => {
+  expect(chunk1([1, 2, 3, 4, 5, 6], 2)).toEqual([[1, 2], [3, 4], [5, 6]]);
+  expect(chunk1([1, 2, 3, 4], 3)).toEqual([[1, 2, 3], [4]]);
+  expect(chunk1([1, 2, 3, 4], 5)).toEqual([[1, 2, 3, 4]]);
+ });
+});
