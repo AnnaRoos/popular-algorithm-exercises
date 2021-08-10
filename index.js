@@ -138,4 +138,80 @@ function fizzBuzz3(number) {
 
 const output = [...Array(30)].map((_, i) => fizzBuzz3(i + 1));
 
-module.exports = { stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1 };
+//Max character
+
+//My solution, I thought I also need to remove special characters and make all lower case
+function maxChar1(string) {
+  if (string.length < 2) {
+    return string;
+  }
+  const onlyMultiples = string.replace(/\W/g, '').toLowerCase().split('')
+    .sort().filter((el, i, array) => el === array[i + 1]).join('');
+  return maxChar1(onlyMultiples);
+};
+
+
+//Solution from article
+function maxChar2(string) {
+  const characters = {};
+
+  for (let character of string)
+    characters[character] = characters[character] + 1 || 1;
+
+  let maxCount = 0;
+  let maxCharacter = null;
+
+  for (let character in characters) {
+    if (characters[character] > maxCount) {
+      maxCount = characters[character];
+      maxCharacter = character;
+    }
+  }
+
+  return maxCharacter;
+};
+
+
+//Anagrams
+
+//My solution
+function sortedLetters(string) {
+  return string.replace(/\W/g, '').toLowerCase().split('')
+    .sort().join('');
+}
+
+function anagrams1(string1, string2) {
+  return sortedLetters(string1) === sortedLetters(string2);
+};
+
+//Solutions in article
+const charCount = string => {
+  const table = {};
+
+  for (let char of string.replace(/\W/g, "").toLowerCase()) {
+        table[char] = table[char] + 1 || 1;
+  }
+  return table;
+};
+
+function anagrams2(stringA, stringB) {
+  const charCountA = charCount(stringA);
+  const charCountB = charCount(stringB);
+
+  if (Object.keys(charCountA).length !== Object.keys(charCountB).length) {
+    return false;
+  }
+
+  for (let char in charCountA) {
+   if (charCountA[char] !== charCountB[char]) return false;
+  }
+ 
+  return true;
+};
+
+const sort = string => string.replace(/\W/g, "").toLowerCase().split("").sort().join("");
+function anagrams3(string1, string2) {
+  return sort(stringA) === sort(stringB);
+};
+
+module.exports = { stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 };

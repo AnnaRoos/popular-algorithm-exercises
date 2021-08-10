@@ -1,4 +1,4 @@
-const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1 } = require('./index');
+const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 } = require('./index');
 
 
 //String reversal
@@ -50,3 +50,22 @@ describe("Fizz Buzz", () => {
   expect(output[5]).toEqual("Fizz Buzz");
  });
 });
+
+//Max character
+
+describe("Max Character", () => {
+ test("Should return max character", () => {
+  expect(maxChar2("Hello World!")).toEqual("l");
+ });
+});
+
+//Anagrams
+describe("Anagrams", () => {
+ test("Should implement anagrams", () => {
+  expect(anagrams1("hello world", "world hello")).toBe(true);
+  expect(anagrams1("hello world", "hello there")).toBe(false);
+  expect(anagrams1("Henrik Schyffert", "Fin tysk herrchef")).toBe(true);
+ });
+});
+
+
