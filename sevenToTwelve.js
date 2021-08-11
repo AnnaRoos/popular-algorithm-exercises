@@ -2,13 +2,13 @@
 
 //My solutions
 const vowels1 = (string) => {
-  return string.match(/[aeiouyåäö]/gi).length;
-}
+  return string.match(/[aeiouyåäö]/gi) ? string.match(/[aeiouyåäö]/gi).length : 0;
+};
 
 const vowels2 = (string) => {
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
   return string.toLowerCase().split('').filter(el => vowels.includes(el)).length;
-}
+};
 
 //Solutions in article
 const vowels3 = string => {
@@ -24,7 +24,7 @@ const vowels3 = string => {
 const vowels4 = string => {
   const matches = string.match(/[aeiou]/gi);
   return matches ? matches.length : 0;
-}
+};
 
 
 //Array chunking
@@ -34,8 +34,8 @@ const chunk1 = (arr, num) => {
   if (arr.length <= num) {
     return [arr];
   }
-  return [arr.slice(0, num)].concat(chunk(arr.slice(num), num));
-}
+  return [arr.slice(0, num)].concat(chunk1(arr.slice(num), num));
+};
 
 //Solutions in article
 const chunk2 = (array, size) => {
@@ -71,4 +71,66 @@ const chunk4 = (array, size) => {
 
   return chunks;
 };
-module.exports = { vowels2, chunk1 };
+
+
+//Reverse arrays
+
+//My solution
+const reverseArray1 = (arr) => {
+  //If you don't want to overwrite the original array
+  const array = [...arr];
+  array.reverse();
+  return array;
+};
+
+//Solution in article
+const reverseArray2 = (array) => {
+  for (let i = 0; i < array.length / 2; i++) {
+    const temp = array[i];
+    array[i] = array[array.length - 1 - i];
+    array[array.length - 1 - i] = temp;
+  }
+  return array;
+};
+
+const reverseArray3 = (array) => {
+  for (let i = 0; i < array.length / 2; i++) {
+    [array[i], array[array.length - 1 - i]] = [
+      array[array.length - 1 - i],
+      array[i],
+    ];
+  }
+  return array;
+};
+
+
+//Reverse words
+
+//My solution
+const reverseWords1 = (string) => {
+  return string.split(' ').map(el => el.split('').reverse().join('')).join(' ');
+};
+
+//Solution in article
+const reverseWords2 = (string) => {
+  const wordsReversed = [];
+
+  string.split(' ').forEach((word) => {
+    let wordReversed = '';
+    for (let i = word.length - 1; i >= 0; i--) wordReversed += word[i];
+    wordsReversed.push(wordReversed);
+  });
+
+  return wordsReversed.join(' ');
+};
+
+const reverseWords3 = (string) => {
+  return string.split(' ').map((word) => word.split('').reverse().join('')).join(' ');
+};
+
+
+//Capitalize
+
+//My solution
+
+module.exports = { vowels2, chunk1, reverseArray1, reverseWords1 };
