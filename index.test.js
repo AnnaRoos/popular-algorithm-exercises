@@ -1,5 +1,5 @@
 const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 } = require('./oneToSix');
-const { vowels2, chunk1, reverseArray1, reverseWords1 } = require('./sevenToTwelve');
+const { vowels2, chunk1, reverseArray1, reverseWords1, capitalize1 } = require('./sevenToTwelve');
 
 //String reversal
 
@@ -101,9 +101,21 @@ describe('Reverse Arrays', () => {
   });
 });
 
+
 //Reverse words
+
 describe('Reverse Words', () => {
   test('Should reverse words', () => {
     expect(reverseWords1('I love JavaScript!')).toEqual('I evol !tpircSavaJ');
   });
 });
+
+
+//Capitalization
+
+describe('Capitalization', () => {
+  test('Should capitalize phrase', () => {
+    expect(capitalize1('hello world')).toEqual('Hello World');
+  });
+});
+

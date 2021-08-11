@@ -129,8 +129,30 @@ const reverseWords3 = (string) => {
 };
 
 
-//Capitalize
+//Capitalization
 
 //My solution
+const capitalize1 = (string) => {
+  return string.split(' ').map(word => word.charAt(0).toUpperCase().concat(word.substring(1))).join(' ');
+};
 
-module.exports = { vowels2, chunk1, reverseArray1, reverseWords1 };
+//Solution in article
+const capitalize2 = (phrase) => {
+  const words = [];
+
+  for (let word of phrase.split(' '))
+    words.push(word[0].toUpperCase() + word.slice(1));
+
+  return words.join(' ');
+};
+
+const capitalize3 = (phrase) => {
+  let title = phrase[0].toUpperCase();
+
+  for (let i = 1; i < phrase.length; i++)
+    title += phrase[i - 1] === ' ' ? phrase[i].toUpperCase() : phrase[i];
+
+  return title;
+};
+
+module.exports = { vowels2, chunk1, reverseArray1, reverseWords1, capitalize1 };
