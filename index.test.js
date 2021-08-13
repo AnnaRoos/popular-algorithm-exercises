@@ -1,6 +1,6 @@
 const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 } = require('./oneToSix');
 const { vowels2, chunk1, reverseArray1, reverseWords1, capitalize1, caesarCipher1 } = require('./sevenToTwelve');
-
+const { ransomNote1 } = require('./thirteenToTwentyTwo');
 //String reversal
 
 describe("String Reversal", () => {
@@ -131,3 +131,22 @@ test("Should shift to the left", () => {
  });
 });
 
+
+//Ransom note
+
+const magazine =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+describe('Ransom Note', () => {
+  test('Should return true', () => {
+    expect(ransomNote1('sit ad est sint', magazine)).toBe(true);
+  });
+  test('Should return false', () => {
+    expect(ransomNote1('sit ad est love', magazine)).toBe(false);
+  });
+  test('Should return true', () => {
+    expect(ransomNote1('sit ad est sint in in', magazine)).toBe(true);
+  }); 
+  test('Should return false', () => {
+    expect(ransomNote1('sit ad est sint in in in in', magazine)).toBe(false);
+  });
+});
