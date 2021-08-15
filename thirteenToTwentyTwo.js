@@ -140,7 +140,94 @@ class Stats1 {
 }
 
 
+//Two sum
+
+//My solution
+//Really didn't know how to solve this in a good way!
+const twoSum1 = (array, sum) => {
+  const pairs = [];
+  const visited = [];
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      if (
+        array[i] + array[j] === sum &&
+        !(i === j) &&
+        !visited.includes(array[i]) &&
+        !visited.includes(array[j])
+      ) {
+        visited.push(array[i]);
+        visited.push(array[j]);
+        pairs.push([array[i], array[j]]);
+      }
+      
+    }
+  }
+ 
+  return pairs;
+};
+
+//Solution in article
+const twoSum2 = (array, sum) => {
+  const pairs = [];
+  const store = [];
+
+  for (let part1 of array) {
+    const part2 = sum - part1;
+    if (store.indexOf(part2) !== -1) pairs.push([part1, part2]);
+    store.push(part1);
+  }
+
+  return pairs;
+};
+
+//Found more solutions in this article: https://levelup.gitconnected.com/solving-the-two-sum-problem-in-javascript-three-ways-4d43067fcfc7
+function bruteForceTwoSum(array, sum) {
+  let nums = [];
+
+  let prevNums = [];
+
+  for (let x in array) {
+    for (let y in array) {
+      if (array[x] + array[y] === sum) {
+        if (!!nums.length) {
+          if (!prevNums.includes(array[x]) && !prevNums.includes(array[y])) {
+            prevNums.push(array[x]);
+            nums.push([array[x], array[y]]);
+          }
+        } else {
+          nums.push([array[x], array[y]]);
+          prevNums.push(array[x]);
+        }
+      }
+    }
+  }
+  return nums;
+}
+
+//Using binary search
+let binarySearch = (array, target, start = 0, end = array.length - 1) => {
+  let midPoint = ~~(start + (end - start) / 2);
+
+  switch (true) {
+    case array[start] === target:
+      return array[start];
+    case array[midPoint] === target:
+      return array[midPoint];
+    case array[end] === target:
+      return array[end];
+    case end - start === 0:
+      return false;
+    case array[midPoint] > target:
+      return binarySearch(array, target, start + 1, midPoint - 1);
+    case array[midPoint] < target:
+      return binarySearch(array, target, midPoint + 1, end - 1);
+  }
+  return false;
+};
+
 module.exports = {
   ransomNote1,
   Stats1,
+  twoSum1
 };
