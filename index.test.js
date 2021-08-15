@@ -1,6 +1,6 @@
 const {stringReversal1, isPalindrome4, integerReversal2, fizzBuzz1, maxChar2, anagrams1 } = require('./oneToSix');
 const { vowels2, chunk1, reverseArray1, reverseWords1, capitalize1, caesarCipher1 } = require('./sevenToTwelve');
-const { ransomNote1 } = require('./thirteenToTwentyTwo');
+const { ransomNote1, Stats1 } = require('./thirteenToTwentyTwo');
 //String reversal
 
 describe("String Reversal", () => {
@@ -150,3 +150,28 @@ describe('Ransom Note', () => {
     expect(ransomNote1('sit ad est sint in in in in', magazine)).toBe(false);
   });
 });
+
+
+//Mean, median and mode
+
+const stat1 = new Stats1([1, 2, 3, 4, 4, 5, 5]);
+const stat2 = new Stats1([1, 1, 2, 2, 3, 3, 4, 4]);
+describe('Mean', () => {
+  test('Should implement mean', () => {
+    expect(Stats1.round(stat1.mean())).toEqual(3.43);
+    expect(Stats1.round(stat2.mean())).toEqual(2.5);
+  });
+});
+describe('Median', () => {
+  test('Should implement median', () => {
+    expect(stat1.median()).toEqual(4);
+    expect(stat2.median()).toEqual(2.5);
+  });
+});
+describe('Mode', () => {
+  test('Should implement mode', () => {
+    expect(stat1.mode()).toEqual([4, 5]);
+    expect(stat2.mode()).toEqual([]);
+  });
+});
+
