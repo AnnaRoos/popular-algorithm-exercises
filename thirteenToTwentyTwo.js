@@ -67,7 +67,7 @@ class Stats1 {
     const counts = {};
     let mode = [];
     let highestCount = 0;
-    
+
     this.array.forEach((count) => {
       if (!counts[count]) {
         counts[count] = 1;
@@ -79,7 +79,7 @@ class Stats1 {
         highestCount = counts[key];
       }
     }
-    if (Object.values(counts).every(count => count === highestCount)) {
+    if (Object.values(counts).every((count) => count === highestCount)) {
       return mode;
     }
     for (const key in counts) {
@@ -96,7 +96,7 @@ class Stats1 {
 }
 
 //Solution in article
- class Stats2 {
+class Stats2 {
   constructor(array) {
     this.array = array;
   }
@@ -106,7 +106,9 @@ class Stats1 {
   }
 
   mean() {
-    return this.array.reduce((sum, value) => sum + value, 0) / this.array.length;
+    return (
+      this.array.reduce((sum, value) => sum + value, 0) / this.array.length
+    );
   }
 
   median() {
@@ -120,7 +122,7 @@ class Stats1 {
 
   mode() {
     const table = {};
-    this.array.forEach(value => (table[value] = table[value] + 1 || 1));
+    this.array.forEach((value) => (table[value] = table[value] + 1 || 1));
 
     let modes = [];
     let max = 0;
@@ -138,7 +140,6 @@ class Stats1 {
     return modes;
   }
 }
-
 
 //Two sum
 
@@ -160,10 +161,9 @@ const twoSum1 = (array, sum) => {
         visited.push(array[j]);
         pairs.push([array[i], array[j]]);
       }
-      
     }
   }
- 
+
   return pairs;
 };
 
@@ -226,8 +226,113 @@ let binarySearch = (array, target, start = 0, end = array.length - 1) => {
   return false;
 };
 
+let binarySearchTwoSum = (array, sum) => {
+  let sortedArray = array.sort();
+
+  let nums = [];
+  let prevNums = [];
+
+  for (let i in sortedArray) {
+    let addend = binarySearch(sortedArray, sum - sortedArray[i]);
+    if (
+      !!addend &&
+      !prevNums.includes(array[i]) &&
+      !prevNums.includes(addend)
+    ) {
+      nums.push([sortedArray[i], addend]);
+      prevNums.push(addend);
+    }
+  }
+  return nums;
+};
+
+//Using hash
+//Does not work, return several copies of same combination
+let hashTwoSum = (array, sum) => {
+  let storageHash = {};
+  let nums = [];
+
+  for (let i in array) {
+    let addend = sum - array[i];
+    if (addend in storageHash) {
+      nums.push([addend, array[i]]);
+    }
+    storageHash[array[i]] = i;
+  }
+  return nums;
+};
+
+//Max profit
+
+//My solution
+const maxProfit1 = (array) => {
+  const sortedArray = Array(...array).sort(function (a, b) {
+    return a - b;
+  });
+  let maxPrice1 = 0;
+  let maxPrice2 = 0;
+  if (
+    array.indexOf(sortedArray[0]) <
+    array.indexOf(sortedArray[sortedArray.length - 1])
+  ) {
+    return [sortedArray[0], sortedArray[sortedArray.length - 1]];
+  }
+  if (
+    array.indexOf(sortedArray[0]) <
+    array.indexOf(sortedArray[sortedArray.length - 2])
+  ) {
+    maxPrice1 = sortedArray[sortedArray.length - 2] - sortedArray[0];
+  }
+  if (
+    array.indexOf(sortedArray[1]) <
+    array.indexOf(sortedArray[sortedArray.length - 1])
+  ) {
+    maxPrice2 = sortedArray[sortedArray.length - 1] - sortedArray[1];
+  }
+
+  if (maxPrice1 > maxPrice2) {
+    return [sortedArray[0], sortedArray[sortedArray.length - 2]];
+  }
+  if (maxPrice2 > maxPrice1) {
+    return [sortedArray[1], sortedArray[sortedArray.length - 1]];
+  }
+
+  array.splice(array.indexOf(sortedArray[0]));
+  array.splice(array.indexOf(sortedArray[sortedArray.length - 1]));
+  console.log(array);
+  return maxProfit1(array);
+};
+
+//Solutin in article
+//This did not pass tha last test that I included though, 
+//when the maxnumber is not the best selling price and the best 
+//buying price comes after the highest number
+function maxProfit2(prices) {
+  let minBuyPrice = prices[0] < prices[1] ? prices[0] : prices[1],
+    maxSellPrice = prices[0] < prices[1] ? prices[1] : prices[2];
+  let maxProfit = maxSellPrice - minBuyPrice;
+  let tempBuyPrice = minBuyPrice;
+
+  for (let index = 2; index < prices.length; index++) {
+    const sellPrice = prices[index];
+
+    if (minBuyPrice > sellPrice) tempBuyPrice = prices[index];
+    else {
+      const profit = sellPrice - minBuyPrice;
+      if (profit > maxProfit)
+        (maxProfit = profit),
+          (maxSellPrice = sellPrice),
+          (minBuyPrice = tempBuyPrice);
+    }
+  }
+
+  return [minBuyPrice, maxSellPrice];
+}
+
 module.exports = {
   ransomNote1,
   Stats1,
-  twoSum1
+  twoSum1,
+  binarySearchTwoSum,
+  maxProfit1,
 };
