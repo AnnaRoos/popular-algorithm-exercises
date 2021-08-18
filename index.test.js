@@ -18,11 +18,13 @@ const {
   ransomNote1,
   Stats1,
   binarySearchTwoSum,
+} = require('./thirteenToFifteen.js');
+const {
   maxProfit1,
   primes,
   fibonacci1,
-  memoFibonacci
-} = require('./thirteenToTwentyTwo');
+  memoFibonacci,
+} = require('./sixteenToNineteen.js');
 
 //String reversal
 
