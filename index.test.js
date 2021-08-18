@@ -19,7 +19,11 @@ const {
   Stats1,
   binarySearchTwoSum,
   maxProfit1,
+  primes,
+  fibonacci1,
+  memoFibonacci
 } = require('./thirteenToTwentyTwo');
+
 //String reversal
 
 describe('String Reversal', () => {
@@ -213,10 +217,10 @@ describe('Two Sum', () => {
 
 describe('Max Profit', () => {
   test('Should return minimum buy price and maximum sell price', () => {
-     expect(maxProfit1([1, 2, 3, 4, 5])).toEqual([1, 5]);
+    expect(maxProfit1([1, 2, 3, 4, 5])).toEqual([1, 5]);
     expect(maxProfit1([2, 1, 5, 3, 4])).toEqual([1, 5]);
-    expect(maxProfit1([2, 10, 1, 3])).toEqual([2, 10]); 
-    expect(maxProfit1([50, 80, 1, 79])).toEqual([1, 79]);  
+    expect(maxProfit1([2, 10, 1, 3])).toEqual([2, 10]);
+    expect(maxProfit1([50, 80, 1, 79])).toEqual([1, 79]);
   });
 });
 
@@ -225,5 +229,31 @@ describe('Max Profit', () => {
 describe('Sieve of Eratosthenes', () => {
   test('Should return all prime numbers', () => {
     expect(primes(10)).toEqual([2, 3, 5, 7]);
+    expect(primes(100)).toEqual([
+      2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
+      71, 73, 79, 83, 89, 97,
+    ]);
   });
 });
+
+//Fibonacci
+
+describe('Fibonacci', () => {
+  test('Should implement fibonacci', () => {
+    expect(fibonacci1(1)).toEqual(1);
+    expect(fibonacci1(2)).toEqual(1);
+    expect(fibonacci1(3)).toEqual(2);
+    expect(fibonacci1(6)).toEqual(8);
+    expect(fibonacci1(10)).toEqual(55);
+  });
+});
+
+//Memoized fibonacci
+
+describe('Memoized Fibonacci', () => {
+  it('Should implement memoized fibonacci', () => {
+    expect(memoFibonacci(6)).toEqual(8);
+    expect(memoFibonacci(10)).toEqual(55);
+  });
+});
+
