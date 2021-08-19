@@ -25,6 +25,10 @@ const {
   fibonacci1,
   memoFibonacci,
 } = require('./sixteenToNineteen.js');
+const {
+  steps,
+  stepsRecursion
+} = require('./twentyToTwentytwo.js');
 
 //String reversal
 
@@ -257,5 +261,14 @@ describe('Memoized Fibonacci', () => {
     expect(memoFibonacci(6)).toEqual(8);
     expect(memoFibonacci(10)).toEqual(55);
   });
+});
+
+//Staircase
+
+describe("Steps", () => {
+ test("Should print steps", () => {
+  expect(steps(3)).toEqual("#  \n## \n###\n");
+  expect(stepsRecursion(3)).toEqual("#  \n## \n###\n");
+ });
 });
 
