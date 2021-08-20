@@ -27,7 +27,9 @@ const {
 } = require('./sixteenToNineteen.js');
 const {
   steps,
-  stepsRecursion
+  stepsRecursion,
+  pyramid1,
+  _pyramid1
 } = require('./twentyToTwentytwo.js');
 
 //String reversal
@@ -270,5 +272,14 @@ describe("Steps", () => {
   expect(steps(3)).toEqual("#  \n## \n###\n");
   expect(stepsRecursion(3)).toEqual("#  \n## \n###\n");
  });
+});
+
+//Pyramid
+
+describe('Pyramid', () => {
+  test('Should print pyramid', () => {
+    expect(pyramid1(3)).toEqual('  #  \n ### \n#####\n');
+    expect(_pyramid1(3)).toEqual('  #  \n ### \n#####\n');
+  });
 });
 
