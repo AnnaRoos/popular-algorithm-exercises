@@ -33,7 +33,6 @@ const stepsRecursion = (hashes, spaces = 0, staircase = '') => {
   return stepsRecursion(hashes, spaces, staircase);
 };
 
-
 //Solution in article
 const steps2 = (number) => {
   let stairs = '';
@@ -59,14 +58,13 @@ const stepsRecursion2 = (number, row = 0, stair = '', stairs = '') => {
   return _steps(number, row, stair + (stair.length <= row ? '#' : ' '), stairs);
 };
 
-
 //Pyramid
 
 //My solution
 const pyramid1 = (steps) => {
   let pyramid = '';
   for (let i = 0; i < steps; i++) {
-    for (let j = 1; j < (steps * 2); j++) {
+    for (let j = 1; j < steps * 2; j++) {
       if (j <= steps + i && j >= steps - i) {
         pyramid += '#';
       } else {
@@ -78,25 +76,26 @@ const pyramid1 = (steps) => {
   return pyramid;
 };
 
-
-//I took the solution from the previous exercise and modified it to understand it better, 
+//I took the solution from the previous exercise and modified it to understand it better,
 //now I get all the parameters and how the recursion works
 const _pyramid1 = (number, row = 0, pyramidStep = '', pyramid = '') => {
   if (number === row) {
-    console.log(pyramid)
     return pyramid;
   }
-  if (pyramidStep.length === (number * 2) -1) {
-    return _pyramid1(
-      number,
-      row + 1,
-      '',
-      pyramid + pyramidStep + '\n'
-    );
-    }
-  return _pyramid1(number, row, pyramidStep + (pyramidStep.length +1 <= number + row && pyramidStep.length +1 >= number - row ? '#' : ' '), pyramid);
+  if (pyramidStep.length === number * 2 - 1) {
+    return _pyramid1(number, row + 1, '', pyramid + pyramidStep + '\n');
+  }
+  return _pyramid1(
+    number,
+    row,
+    pyramidStep +
+      (pyramidStep.length + 1 <= number + row &&
+      pyramidStep.length + 1 >= number - row
+        ? '#'
+        : ' '),
+    pyramid
+  );
 };
-
 
 //Solutions in article
 const pyramid2 = (number) => {
@@ -131,9 +130,58 @@ const _pyramid2 = (number, row = 0, level = '', levels = '') => {
   );
 };
 
+//Matrix spiral
+
+//This one I could not figure out on my own
+
+//Solution in article
+const spiral2 = (number) => {
+  let counter = 1;
+  let startRow = 0,
+    endRow = number - 1;
+  let startColumn = 0,
+    endColumn = number - 1;
+
+  const matrix = [];
+  for (let i = 0; i < number; i++) matrix.push([]);
+
+  while (startColumn <= endColumn && startRow <= endRow) {
+    // Start Row
+    for (let i = startColumn; i <= endColumn; i++) {
+      matrix[startRow][i] = counter;
+      counter++;
+    }
+    startRow++;
+
+    // End Column
+    for (let i = startRow; i <= endRow; i++) {
+      matrix[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+
+    // End Row
+    for (let i = endColumn; i >= startColumn; i--) {
+      matrix[endRow][i] = counter;
+      counter++;
+    }
+    endRow--;
+
+    // Start Column
+    for (let i = endRow; i >= startRow; i--) {
+      matrix[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+
+  return matrix;
+};
+
 module.exports = {
   steps,
   stepsRecursion,
   pyramid1,
-  _pyramid1
+  _pyramid1,
+  spiral2,
 };
