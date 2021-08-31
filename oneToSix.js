@@ -102,7 +102,7 @@ const fizzBuzz1 = (number) => {
   return Array.from({ length: number }, (el, i) => {
     return i + 1;
   }).map(el => {
-    if (el % 2 === 0 && el % 3 === 0) return 'Fizz Buzz'
+    if (el % 6 === 0) return 'Fizz Buzz'
     if (el % 2 === 0) return 'Fizz';
     if (el % 3 === 0) return 'Buzz';
     return el;
